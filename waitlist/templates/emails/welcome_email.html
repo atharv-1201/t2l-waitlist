@@ -4,54 +4,1086 @@
     <meta charset="utf-8">
     <title>Welcome to Turn2Law Waitlist</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 600px;
+        
+        .page-wrapper {
+            padding: 20px;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #0f172a 0%, #d97706 50%, #0f172a 100%);
+            background-size: 200% 100%;
+            animation: topLoader 2s ease-in-out;
+            z-index: 1000;
+        }
+        
+        @keyframes topLoader {
+            0% {
+                background-position: -200% 0;
+                opacity: 1;
+            }
+            70% {
+                background-position: 200% 0;
+                opacity: 1;
+            }
+            100% {
+                background-position: 200% 0;
+                opacity: 0;
+            }
+        }
+        
+        .email-wrapper {
+            max-width: 650px;
             margin: 0 auto;
-            padding: 20px;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04),
+                0 0 0 1px rgba(217, 119, 6, 0.1);
+            border: 2px solid transparent;
+            background-image: 
+                linear-gradient(white, white),
+                linear-gradient(135deg, #0f172a 0%, #d97706 25%, #1e293b 50%, #d97706 75%, #0f172a 100%);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            animation: slideInUp 1s ease-out, borderGlow 6s ease-in-out infinite;
+            position: relative;
         }
-        .header {
-            background-color: #4a5568;
-            color: white;
-            padding: 20px;
+        
+        @keyframes borderGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+                    0 0 0 1px rgba(217, 119, 6, 0.1),
+                    0 0 20px rgba(217, 119, 6, 0.1);
+            }
+            50% {
+                box-shadow: 
+                    0 25px 35px -5px rgba(0, 0, 0, 0.15),
+                    0 15px 20px -5px rgba(0, 0, 0, 0.08),
+                    0 0 0 1px rgba(217, 119, 6, 0.3),
+                    0 0 40px rgba(217, 119, 6, 0.2);
+            }
+        }
+        
+        .email-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(217, 119, 6, 0.02) 50%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .header-section {
+            position: relative;
+            background: transparent;
+            padding: 0;
+            overflow: hidden;
+            margin: -2px -2px 0 -2px;
+            width: calc(100% + 4px);
+        }
+        
+        .banner-container {
+            position: relative;
+            padding: 0;
             text-align: center;
+            z-index: 2;
+            background: transparent;
+            width: 100%;
+            overflow: hidden;
         }
-        .content {
-            padding: 20px;
+        
+        .logo-wrapper {
+            display: block;
+            position: relative;
+            margin: 0;
+            width: 100%;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            border: none;
+            overflow: hidden;
         }
-        .footer {
+        
+        .banner-logo {
+            width: calc(100% + 4px);
+            max-width: none;
+            height: auto;
+            min-height: 200px;
+            max-height: 400px;
+            object-fit: cover;
+            animation: logoFloat 1.5s ease-out;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.08));
+            display: block;
+            margin: -2px;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .banner-logo:hover {
+            transform: scale(1.02) translateY(-2px);
+            filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.12));
+        }
+        
+        @keyframes logoFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 60px 40px;
             text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: #666;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(15,23,42,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .welcome-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(217, 119, 6, 0.03) 50%, transparent 70%);
+            animation: gentleShimmer 8s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        @keyframes gentleShimmer {
+            0%, 100% {
+                transform: rotate(0deg) translateX(-100%);
+                opacity: 0;
+            }
+            50% {
+                transform: rotate(15deg) translateX(100%);
+                opacity: 1;
+            }
+        }
+        
+        .welcome-content {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .welcome-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            animation: titleSlideUp 1.2s ease-out 0.3s both;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: #0f172a;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b  30%, #d97706 60%, #0f172a 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleSlideUp 1.2s ease-out 0.3s both, premiumTextShine 4s ease-in-out infinite;
+        }
+        
+        @keyframes premiumTextShine {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        .welcome-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%);
+            border-radius: 2px;
+            animation: lineExpand 1s ease-out 1.5s both;
+        }
+        
+        .welcome-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 30px 0 25px 0;
+            animation: subtitleSlideIn 1.5s ease-out 0.6s both;
+            color: #475569;
+            line-height: 1.4;
+            position: relative;
+        }
+        
+        .welcome-description {
+            font-size: 18px;
+            color: #64748b;
+            margin: 0;
+            max-width: 500px;
+            margin: 0 auto;
+            animation: descriptionFadeIn 1.8s ease-out 0.9s both;
+            line-height: 1.6;
+            font-weight: 400;
+            background: white;
+            padding: 24px 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .welcome-description::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%);
+            border-radius: 12px 12px 0 0;
+        }
+        
+        @keyframes titleSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes lineExpand {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 120px;
+            }
+        }
+        
+        @keyframes subtitleSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes descriptionFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% {
+                transform: translateY(-50%) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-50%) scale(1.3);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes titleSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes greetingSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes mainTextFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes cardSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes sparkleFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-5px) rotate(10deg);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes shimmerSlow {
+            0%, 100% {
+                transform: rotate(30deg) translateX(-100%);
+            }
+            50% {
+                transform: rotate(30deg) translateX(100%);
+            }
+        }
+        
+        .content-section {
+            padding: 50px 40px;
+            background: #ffffff;
+            position: relative;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(15,23,42,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+        
+        .greeting {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #0f172a;
+            text-align: center;
+            padding: 24px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            animation: greetingSlideIn 1s ease-out 0.2s both;
+        }
+        
+        .greeting::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%);
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .greeting::after {
+            content: '⚖️';
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 50%;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-name {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .highlight-name::after {
+            content: '⚖️';
+            position: absolute;
+            top: -3px;
+            right: -25px;
+            font-size: 14px;
+            animation: sparkleFloat 2s ease-in-out infinite;
+        }
+        
+        .main-text {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #475569;
+            margin-bottom: 40px;
+            text-align: center;
+            padding: 28px;
+            background: rgba(248, 250, 252, 0.8);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            animation: mainTextFadeIn 1s ease-out 0.4s both;
+            position: relative;
+        }
+        
+        .main-text::before {
+            content: '"';
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            font-size: 32px;
+            color: #d97706;
+            opacity: 0.4;
+            font-family: serif;
+        }
+        
+        .main-text::after {
+            content: '"';
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-size: 32px;
+            color: #d97706;
+            opacity: 0.4;
+            font-family: serif;
+        }
+        
+        .details-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+            animation: cardSlideUp 1s ease-out 0.6s both;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+        }
+        
+        .details-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                0 8px 16px -4px rgba(217, 119, 6, 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+        }
+        
+        .details-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #0f172a 0%, #1e293b 30%, #d97706 60%, #0f172a 100%);
+            animation: topBarShimmer 3s ease-in-out infinite;
+            background-size: 200% 100%;
+        }
+        
+        .details-card::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.12) 0%, rgba(15, 23, 42, 0.05) 40%, transparent 70%);
+            border-radius: 50%;
+            animation: premiumGlow 3s ease-in-out infinite;
+            filter: blur(1px);
+        }
+        
+        @keyframes topBarShimmer {
+            0%, 100% {
+                background-position: -200% 0;
+            }
+            50% {
+                background-position: 200% 0;
+            }
+        }
+        
+        @keyframes premiumGlow {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.4;
+            }
+            33% {
+                transform: scale(1.3) rotate(120deg);
+                opacity: 0.7;
+            }
+            66% {
+                transform: scale(0.8) rotate(240deg);
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes gentlePulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.6;
+            }
+        }
+        
+        .details-header {
+            margin-bottom: 24px;
+        }
+        
+        .details-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.025em;
+        }
+        
+        .details-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin: 0;
+            font-weight: 400;
+        }
+        
+        .details-content {
+            border: 1px solid #f3f4f6;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f3f4f6;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .detail-row::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(180deg, #d97706 0%, #f59e0b 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-row:hover {
+            background-color: #f9fafb;
+            transform: translateX(5px);
+        }
+        
+        .detail-row:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .detail-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #475569;
+            display: flex;
+            align-items: center;
+        }
+        
+        .detail-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            color: #64748b;
+        }
+        
+        .detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0f172a;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+            padding: 8px 16px;
+            border-radius: 8px;
+            min-width: 80px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+        
+        .detail-value::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(217, 119, 6, 0.2) 50%, transparent 100%);
+            transition: left 0.6s ease;
+        }
+        
+        .detail-row:hover .detail-value {
+            background: linear-gradient(135deg, #fef7ed 0%, #fed7aa 50%, #f97316 100%);
+            color: #9a3412;
+            border-color: #f97316;
+            transform: scale(1.05);
+            box-shadow: 
+                0 4px 12px rgba(217, 119, 6, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+        
+        .detail-row:hover .detail-value::before {
+            left: 100%;
+        }
+        
+        .detail-value::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(217, 119, 6, 0.1) 50%, transparent 100%);
+            transition: left 0.5s ease;
+        }
+        
+        .detail-row:hover .detail-value::before {
+            left: 100%;
+        }
+        
+        .social-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 36px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90d, #d97706 0%, #f59e0b 100%);
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .social-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 28px;
+            position: relative;
+        }
+        
+        .social-title::before {
+            content: '🤝';
+            margin-right: 8px;
+            font-size: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.08),
+                0 2px 8px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-icon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.2) 30%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.2) 70%, transparent 100%);
+            transform: rotate(-45deg) scale(0);
+            transition: all 0.4s ease;
+        }
+        
+        .social-icon-btn:hover::before {
+            transform: rotate(0deg) scale(1.2);
+        }
+        
+        .social-icon-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 8px 20px rgba(0, 0, 0, 0.08),
+                inset 0 2px 0 rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .social-icon-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .social-icon-btn:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .instagram-btn {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        
+        .linkedin-btn {
+            background: linear-gradient(45deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+        
+        .social-icon {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-icon-btn:hover .social-icon {
+            transform: scale(1.15);
+        }
+        
+        .social-label {
+            display: block;
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #64748b;
+            transition: color 0.3s ease;
+        }
+        
+        .instagram-btn:hover + .social-label {
+            color: #e6683c;
+        }
+        
+        .linkedin-btn:hover + .social-label {
+            color: #1e293b;
+        }
+        
+        .closing-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #64748b;
+            text-align: center;
+            margin-top: 36px;
+            padding: 24px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .footer-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 24px;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .email-wrapper {
+                border-radius: 16px;
+            }
+            .banner-container {
+                padding: 40px 15px;
+            }
+            .logo-wrapper {
+                padding: 0;
+            }
+            .welcome-section {
+                padding: 50px 20px;
+            }
+            .welcome-title {
+                font-size: 36px;
+                letter-spacing: -0.5px;
+            }
+            .welcome-subtitle {
+                font-size: 18px;
+            }
+            .welcome-description {
+                font-size: 15px;
+                padding: 20px 24px;
+            }
+            .banner-logo {
+                max-width: 100%;
+                max-height: 250px;
+                min-height: 150px;
+            }
+            .content-section {
+                padding: 40px 25px;
+            }
+            .content-wrapper {
+                max-width: 100%;
+            }
+            .greeting {
+                font-size: 18px;
+                padding: 18px;
+            }
+            .main-text {
+                font-size: 15px;
+                padding: 20px;
+            }
+            .details-card {
+                padding: 24px;
+                margin: 32px 0;
+            }
+            .details-title {
+                font-size: 18px;
+            }
+            .details-subtitle {
+                font-size: 13px;
+            }
+            .detail-row {
+                padding: 14px 16px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .detail-label {
+                font-size: 13px;
+            }
+            .detail-value {
+                font-size: 13px;
+                align-self: flex-end;
+                min-width: 60px;
+            }
+            .social-section {
+                padding: 24px 18px;
+                margin: 24px 0;
+            }
+            .social-title {
+                font-size: 18px;
+            }
+            .social-links {
+                gap: 20px;
+            }
+            .social-icon-btn {
+                width: 50px;
+                height: 50px;
+            }
+            .social-icon {
+                width: 24px;
+                height: 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Welcome to Turn2Law</h1>
+    <div class="page-wrapper">
+        <div class="email-wrapper">
+            <div class="header-section">
+                <div class="banner-container">
+                    <div class="logo-wrapper">
+                        <img src="t2l_backend/waitlist/templates/emails/turn2law-banner.jpeg" alt="Turn2Law Banner" class="banner-logo" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="welcome-section">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Welcome to Turn2Law</h1>
+                    <p class="welcome-subtitle">Justice. Just a click away</p>
+                    <p class="welcome-description"> ⁠Welcome to Turn2Law — where legal support is finally simple, human, and built entirely around your needs.</p>
+                </div>
+            </div>
+            
+            <div class="content-section">
+            <div class="content-wrapper">
+                <p class="greeting">Dear <span class="highlight-name">{{ full_name }}</span>,</p>
+                
+                <p class="main-text">Thank you for being a part of<strong>Turn2Law </strong>!we genuinely appreciate your interest and are excited to have you on board.</p>
+                
+                <div class="details-card">
+                    <div class="details-header">
+                        <h3 class="details-title">Registration Details</h3>
+                        <p class="details-subtitle">Your account information has been confirmed</p>
+                    </div>
+                    <div class="details-content">
+                        <div class="detail-row">
+                            <div class="detail-label">
+                                <svg class="detail-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                </svg>
+                                Role
+                            </div>
+                            <div class="detail-value">{{ role }}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">
+                                <svg class="detail-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                Location
+                            </div>
+                            <div class="detail-value">{{ location }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="social-section">
+                <div class="social-title">Connect with us on social media</div>
+                <div class="social-links">
+                    <div style="text-align: center;">
+                        <a href="https://www.instagram.com/turn2law?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon-btn instagram-btn" target="_blank" rel="noopener">
+                            <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <span class="social-label">Instagram</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="https://www.linkedin.com/company/turn2law/posts/?feedView=all" class="social-icon-btn linkedin-btn" target="_blank" rel="noopener">
+                            <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <span class="social-label">LinkedIn</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="closing-text">
+                <strong>We'll keep you updated on our progress and notify you when we launch.</strong><br>
+                Get ready to transform your legal career with Turn2Law!
+            </div>
         </div>
-        <div class="content">
-            <p>Dear {{ full_name }},</p>
-            <p>Thank you for joining the Turn2Law waitlist! We're excited to have you on board.</p>
-            <p>Your registration details:</p>
-            <ul>
-                <li><strong>Role:</strong> {{ role }}</li>
-                <li><strong>Location:</strong> {{ location }}</li>
-            </ul>
-            <p>Connect with us on social media:</p>
-            <p>
-                <a href="https://www.instagram.com/turn2law?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a> | <a href="https://www.linkedin.com/company/turn2law/posts/?feedView=all">LinkedIn</a>
-            </p>
-            <p>We'll keep you updated on our progress and notify you when we launch.</p>
-        </div>
-        <div class="footer">
-            <p>© 2025 Turn2Law. All rights reserved.</p>
+        
+        <div class="footer-section">
+            <p>©️ 2025 Turn2Law. All rights reserved.</p>
         </div>
     </div>
 </body>
