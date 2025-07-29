@@ -1,30 +1,47 @@
-# services:
-#   - type: web
-#     name: turn2law-backend
-#     env: python
-#     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --no-input"
-#     startCommand: "gunicorn config.wsgi:application"  
+services:
+  - type: web
+    name: turn2law-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --no-input"
+    startCommand: "gunicorn config.wsgi:application"
       
-#     envVars:
-#       - key: SECRET_KEY
-#         fromSecret: 71@)-hq)fdm78xu$d@@+9ya@cym)lyl4l7-)h)hb3m*jym!$_j
-#       - key: DB_NAME
-#         fromSecret: db_name
-#       - key: DB_USER
-#         fromSecret: db_user
-#       - key: DB_PASSWORD
-#         fromSecret: db_password
-#       - key: DB_HOST
-#         fromSecret: db_host
-#       - key: DB_PORT
-#         value: "5432" 
-#       - key: EMAIL_HOST_USER
-#         fromSecret: email_host_user
-#       - key: EMAIL_HOST_PASSWORD
-#         fromSecret: email_host_password
-#       - key: EMAIL_FROM
-#         fromSecret: email_from
-#       - key: ALLOWED_HOSTS
-#         fromSecret: allowed_hosts
-#       - key: CORS_ALLOWED_ORIGINS
-#         fromSecret: cors_allowed_origins
+      
+    envVars:
+      - key: SECRET_KEY
+        fromSecret: secret_key
+      - key: DEBUG
+        value: "False"
+      - key: DB_NAME
+        fromSecret: db_name
+      - key: DB_USER
+        fromSecret: db_user
+      - key: DB_PASSWORD
+        fromSecret: db_password
+      - key: DB_HOST
+        fromSecret: db_host
+      - key: DB_PORT
+        value: "5432"
+      - key: EMAIL_HOST_USER
+        fromSecret: email_host_user
+      - key: EMAIL_HOST_PASSWORD
+        fromSecret: email_host_password
+      - key: EMAIL_FROM
+        fromSecret: email_from
+      - key: EMAIL_USE_TLS
+        value: "True"
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_HOST
+        value: "smtp.gmail.com"
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.smtp.EmailBackend"
+      - key: ALLOWED_HOSTS
+        fromSecret: allowed_hosts
+      - key: CORS_ALLOWED_ORIGINS
+        fromSecret: cors_allowed_origins
+
+databases:
+  - name: turn2law-db
+    databaseName: turn2law_waitlist
+    user: turn2law_user
+    region: singapore  # Choose closest region to your users (options: oregon, singapore, frankfurt, ohio)
