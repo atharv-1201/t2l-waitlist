@@ -25,7 +25,24 @@ def send_welcome_email(user_data):
                 f"FROM={settings.DEFAULT_FROM_EMAIL}")
 
     try:
-        # Attempt to render template
+        # Create a plain text fallback message (REQUIRED)
+        plain_text_message = f"""
+Hi {user_data['full_name']},
+
+Thank you for joining the Turn2Law waitlist!
+
+We've received your registration with the following details:
+• Role: {user_data['role']}
+• Location: {user_data['location']}
+
+We'll keep you updated on our progress and notify you as soon as Turn2Law is available.
+
+Best regards,
+The Turn2Law Team
+        """.strip()
+
+        # Attempt to render HTML template
+        html_message = None
         logger.debug("Attempting to render email template")
         try:
             html_message = render_to_string('emails/welcome_email.html', {
@@ -33,21 +50,20 @@ def send_welcome_email(user_data):
                 'role': user_data['role'],
                 'location': user_data['location']
             })
-            logger.debug("Template rendered successfully")
+            logger.debug("HTML template rendered successfully")
         except TemplateDoesNotExist as te:
-            logger.error(f"Email template not found: {str(te)}")
-            logger.error(f"Template dirs: {settings.TEMPLATES[0]['DIRS']}")
-            return False
+            logger.warning(f"Email template not found: {str(te)} - using plain text only")
+            # Don't return False here - continue with plain text
         except Exception as template_error:
-            logger.error(f"Template rendering error: {str(template_error)}")
-            return False
+            logger.warning(f"Template rendering error: {str(template_error)} - using plain text only")
+            # Don't return False here - continue with plain text
 
-        # Attempt to send email
+        # Attempt to send email (with both plain text and HTML)
         logger.debug(f"Attempting to send email to {user_data['email']}")
         result = send_mail(
             subject="Welcome to Turn2Law Waitlist!",
-            message='',  
-            html_message=html_message,
+            message=plain_text_message,  # ← FIXED: Now has plain text content
+            html_message=html_message,   # ← This can be None if template fails
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[user_data['email']],
             fail_silently=False,
