@@ -44,8 +44,6 @@ class WaitlistSignupView(APIView):
     def post(self, request):
         try:
             logger.info("=== Waitlist Signup Request Started ===")
-            logger.info(f"Request origin: {request.META.get('HTTP_ORIGIN')}")
-            logger.info(f"Content type: {request.content_type}")
             logger.info(f"Request data: {request.data}")
 
             serializer = WaitlistEntrySerializer(data=request.data)
@@ -57,16 +55,21 @@ class WaitlistSignupView(APIView):
                 instance = serializer.save()
                 logger.info(f"New waitlist entry created: {instance.email}")
 
-                # Send welcome email (don't fail if email fails)
+                # Send welcome email with correct data format
                 try:
-                    email_sent = send_welcome_email(
-                        full_name=instance.full_name,
-                        email=instance.email
-                    )
+                    user_data = {
+                        'full_name': instance.full_name,
+                        'email': instance.email,
+                        'role': instance.get_role_display(),  # Get the display value
+                        'location': instance.location
+                    }
+                    email_sent = send_welcome_email(user_data)  # ← Pass dictionary
+                    
                     if email_sent:
                         logger.info(f"Welcome email sent to {instance.email}")
                     else:
-                        logger.warning(f"Email not sent to {instance.email}")
+                        logger.warning(f"Email sending failed for {instance.email}")
+                        
                 except Exception as e:
                     logger.error(f"Email sending failed: {str(e)}")
                     # Continue execution even if email fails
@@ -92,7 +95,6 @@ class WaitlistSignupView(APIView):
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def get(self, request):
-        """Handle GET requests for testing"""
         return Response({
             'message': 'Waitlist signup endpoint is working',
             'method': 'POST required for signup'
